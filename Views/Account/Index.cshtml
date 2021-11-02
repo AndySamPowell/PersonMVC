@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AccountModel>
+
+
+<div class="container p-3">
+  <div class="row pt-4">
+    <div class="col-6">
+      <h2 class="text-primary">Account List</h2>
+    </div>
+    <div class="col-6 text-right">
+      <a asp-controller="Account" asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> &nbsp; Create New Account
+      </a>
+    </div>
+  </div>
+
+  <br /><br />
+
+  @if (Model.Count() > 0)
+  {
+    <table class="table table-bordered table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>
+            Person Code
+          </th>
+          <th>
+            Account Number
+          </th>
+          <th>
+            Outstanding Balance
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var obj in Model)
+        {
+        <tr>
+          <td width="30%">@obj.PersonCode</td>
+          <td width="30%">@obj.AccountNumber</td>
+          <td width="30%">@obj.OutstandingBalance</td>
+
+          <td class="text-center">
+            <div class="w-80 btn-group" role="group">
+              <a asp-controller="Person" asp-route-Id="@obj.Code" asp-action="Index" class="btn btn-primary mx-2">
+                <i class="fa fa-backward"></i>
+              </a>
+              <a asp-controller="Account" asp-route-Id="@obj.Code" asp-action="Edit" class="btn btn-primary mx-2">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a asp-controller="Account" asp-route-Id="@obj.Code" asp-action="Delete" class="btn btn-danger mx-2">
+                <i class="far fa-trash-alt"></i>
+              </a>
+              <a asp-controller="Transaction" asp-route-Id="@obj.Code" asp-action="Index" class="btn btn-primary mx-2">
+                <i class="fas fa fa-university" style="background:green"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table> }
+  else
+  {
+    <p> No category exists.</p>}
+
+</div>
