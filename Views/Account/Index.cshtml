@@ -1,67 +1,71 @@
 ﻿@model AccountModel
 
+<form method="post">
+  <input asp-for="Code" hidden />
+  <div class="border p-3">
 
-<div class="container p-3">
-  <div class="row pt-4">
-    <div class="col-6">
-      <h2 class="text-primary">Account List</h2>
+    <div class="form-group row">
+      <h2 class="text-info pl-3">Edit Account</h2>
     </div>
-    <div class="col-6 text-right">
-      <a asp-controller="Account" asp-action="Create" class="btn btn-primary">
-        <i class="fas fa-plus"></i> &nbsp; Create New Account
-      </a>
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group row">
+          <div class="col-4">
+            <label asp-for="PersonCode"></label>
+          </div>
+          <div class="col-8">
+            <input asp-for="PersonCode" class="form-control" />
+            <span asp-validation-for="PersonCode" class="text-danger"></span>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label asp-for="AccountNumber"></label>
+          </div>
+          <div class="col-8">
+            <input asp-for="AccountNumber" class="form-control" />
+            <span asp-validation-for="AccountNumber" class="text-danger"></span>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label asp-for="OutstandingBalance"></label>
+          </div>
+          <div class="col-8">
+            <input asp-for="OutstandingBalance" class="form-control" />
+            <span asp-validation-for="OutstandingBalance" class="text-danger"></span>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-8 offset-4 row">
+
+            <div class="col">
+              <input type="submit" class="btn btn-info w-100" value="Update" />
+            </div>
+            <div class="col">
+              <input type="submit" class="btn btn-info w-100" value="Transaction" />
+            </div>
+            <div class="col">
+              <a asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        @* Keep this empty *@
+      </div>
     </div>
   </div>
 
-  <br /><br />
+</form>
 
-  @*@if (Model.Count() > 0)
-  {*@
-    <table class="table table-bordered table-striped" style="width:100%">
-      <thead>
-        <tr>
-          <th>
-            Person Code
-          </th>
-          <th>
-            Account Number
-          </th>
-          <th>
-            Outstanding Balance
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        @*@foreach (var obj in Model)
-        {*@
-        <tr>
-          <td width="30%">@obj.PersonCode</td>
-          <td width="30%">@obj.AccountNumber</td>
-          <td width="30%">@obj.OutstandingBalance</td>
+@section Scripts{
 
-          <td class="text-center">
-            <div class="w-80 btn-group" role="group">
-              <a asp-controller="Person" asp-route-Id="@obj.Code" asp-action="Index" class="btn btn-primary mx-2">
-                <i class="fa fa-backward"></i>
-              </a>
-              <a asp-controller="Account" asp-route-Id="@obj.Code" asp-action="Edit" class="btn btn-primary mx-2">
-                <i class="fas fa-edit"></i>
-              </a>
-              <a asp-controller="Account" asp-route-Id="@obj.Code" asp-action="Delete" class="btn btn-danger mx-2">
-                <i class="far fa-trash-alt"></i>
-              </a>
-              <a asp-controller="Transaction" asp-route-Id="@obj.Code" asp-action="Index" class="btn btn-primary mx-2">
-                <i class="fas fa fa-university" style="background:green"></i>
-              </a>
-            </div>
-          </td>
-        </tr>
-        @*  *@}
-      </tbody>
-    </table> }
-  @*else
-  {
-    <p> No category exists.</p>}*@
+  @{
+      <partial name="_ValidationScriptsPartial" />
+  }
 
-</div>
+}
