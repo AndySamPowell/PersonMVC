@@ -31,32 +31,33 @@ namespace PersonApp.Controllers
             if (response.IsSuccessStatusCode)
             {
                 person = await response.Content.ReadFromJsonAsync<IEnumerable<PersonModel>>();
-
             }
-
-
-
+            
             return View(person);
         }
 
 
-        public async Task<IActionResult> Edit(int? code)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var request = new HttpRequestMessage(HttpMethod.Put, code.ToString());
-            //var client = _clientFactory.CreateClient("person");
-            //var response =  await client.SendAsync(request);
-            //if (code == null || code == 0)
-            //{
-            //    return NotFound();
-            //}
+            var request = new HttpRequestMessage(HttpMethod.Get, "person/" +id.ToString());
+            var client = _clientFactory.CreateClient("person");
+            var response =  await client.SendAsync(request);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-            //var obj = await response.Content.ReadFromJsonAsync<IEnumerable<PersonModel>>.Find(code);
-            //if (obj == null)
-            //{
-            //    return NotFound();
-            //}
+            PersonModel obj = null;
+            if (response.IsSuccessStatusCode)
+            { 
+               obj = await response.Content.ReadFromJsonAsync<PersonModel>();
+            }
+            if (obj == null)
+            {
+                return NotFound();
+            }
 
-            return View();
+            return View(obj);
         }
 
         //POST - EDIT

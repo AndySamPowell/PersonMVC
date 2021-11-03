@@ -18,17 +18,17 @@ namespace PersonMVC.Controllers
         {
             _clientFactory = clientFactory;
         }
-        public async Task<IActionResult> Index(int code)
+        public async Task<IActionResult> Index(int id)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "");
+            var request = new HttpRequestMessage(HttpMethod.Get, "account/" + id.ToString());
             var client = _clientFactory.CreateClient("account");
             var response = await client.SendAsync(request);
-                        IEnumerable<AccountModel> account = null;
-            JsonResult json = new JsonResult("");
+            AccountModel account = null;
+            
 
             if (response.IsSuccessStatusCode)
             {
-                account = await response.Content.ReadFromJsonAsync<IEnumerable<AccountModel>>();
+                account = await response.Content.ReadFromJsonAsync<AccountModel>();
 
             }
 

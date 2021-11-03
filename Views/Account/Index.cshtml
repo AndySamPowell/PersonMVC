@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AccountModel>
+﻿@model AccountModel
 
 
 <div class="container p-3">
@@ -15,8 +15,8 @@
 
   <br /><br />
 
-  @if (Model.Count() > 0)
-  {
+  @*@if (Model.Count() > 0)
+  {*@
     <table class="table table-bordered table-striped" style="width:100%">
       <thead>
         <tr>
@@ -33,8 +33,8 @@
         </tr>
       </thead>
       <tbody>
-        @foreach (var obj in Model)
-        {
+        @*@foreach (var obj in Model)
+        {*@
         <tr>
           <td width="30%">@obj.PersonCode</td>
           <td width="30%">@obj.AccountNumber</td>
@@ -57,11 +57,11 @@
             </div>
           </td>
         </tr>
-        }
+        @*  *@}
       </tbody>
     </table> }
-  else
+  @*else
   {
-    <p> No category exists.</p>}
+    <p> No category exists.</p>}*@
 
 </div>
